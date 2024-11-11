@@ -1,8 +1,12 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"llm-generate-test/postman"
 	"llm-generate-test/swagger"
+	"log"
 	"os"
 
 	"github.com/AlecAivazis/survey/v2"
@@ -37,22 +41,21 @@ func main() {
 		return
 	}
 
-	// Print some basic information
-	fmt.Printf("API Title: %s\n", spec.Info.Title)
-	fmt.Printf("Version: %s\n", spec.Info.Version)
-	fmt.Printf("Contact: %s (%s)\n", spec.Info.Contact.Name, spec.Info.Contact.Email)
-	
-	// Print available endpoints
-	fmt.Println("\nAvailable Endpoints:")
-	for path, item := range spec.Paths {
-		if item.Get != nil {
-			fmt.Printf("GET %s - %s\n", path, item.Get.Summary)
-		}
-		if item.Post != nil {
-			fmt.Printf("POST %s - %s\n", path, item.Post.Summary)
-		}
-		if item.Patch != nil {
-			fmt.Printf("PATCH %s - %s\n", path, item.Patch.Summary)
-		}
+	// Generate Postman collection
+	collection, err := postman.GeneratePostmanCollection(spec)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Convert to JSON
+	jsonData, err := json.MarshalIndent(collection, "", "    ")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Write to file
+	err = ioutil.WriteFile("postman_collection.json", jsonData, 0644)
+	if err != nil {
+		log.Fatal(err)
 	}
 }

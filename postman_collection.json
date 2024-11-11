@@ -1,0 +1,121 @@
+{
+    "info": {
+        "_postman_id": "15b84855-b541-4fd3-9cdc-bcc5f8350d15",
+        "name": "Simple Bank API",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Create new user",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/v1/create_user",
+                    "protocol": "https",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "v1",
+                        "create_user"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"key\": \"value\"\n}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Login user",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/v1/login_user",
+                    "protocol": "https",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "v1",
+                        "login_user"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"key\": \"value\"\n}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Update user",
+            "request": {
+                "method": "PATCH",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/v1/update_user",
+                    "protocol": "https",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "v1",
+                        "update_user"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"key\": \"value\"\n}"
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Verify email",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "{{baseUrl}}/v1/verify_email?emailId={{emailId}}\u0026secretCode={{secretCode}}",
+                    "protocol": "https",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "v1",
+                        "verify_email"
+                    ],
+                    "query": [
+                        {
+                            "key": "emailId",
+                            "value": "{{emailId}}"
+                        },
+                        {
+                            "key": "secretCode",
+                            "value": "{{secretCode}}"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}
