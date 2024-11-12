@@ -1,10 +1,100 @@
 {
     "info": {
-        "_postman_id": "c80ab64c-9e94-427f-aedd-4be86a7d4cda",
+        "_postman_id": "503e9c47-dfc7-4b68-beeb-d46757002885",
         "name": "Status Code API",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
+        {
+            "name": "",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/api/404",
+                    "protocol": "http",
+                    "host": [
+                        "localhost:3000"
+                    ],
+                    "path": [
+                        "api",
+                        "404"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"404\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
+                        ],
+                        "packages": {}
+                    }
+                }
+            ]
+        },
+        {
+            "name": "",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/api/500",
+                    "protocol": "http",
+                    "host": [
+                        "localhost:3000"
+                    ],
+                    "path": [
+                        "api",
+                        "500"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"500\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
+                        ],
+                        "packages": {}
+                    }
+                }
+            ]
+        },
+        {
+            "name": "",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/api/503",
+                    "protocol": "http",
+                    "host": [
+                        "localhost:3000"
+                    ],
+                    "path": [
+                        "api",
+                        "503"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"503\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
+                        ],
+                        "packages": {}
+                    }
+                }
+            ]
+        },
         {
             "name": "",
             "request": {
@@ -29,6 +119,216 @@
                         "type": "text/javascript",
                         "exec": [
                             "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"200\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
+                        ],
+                        "packages": {}
+                    }
+                }
+            ]
+        },
+        {
+            "name": "",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/api/302",
+                    "protocol": "http",
+                    "host": [
+                        "localhost:3000"
+                    ],
+                    "path": [
+                        "api",
+                        "302"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"302\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
+                        ],
+                        "packages": {}
+                    }
+                }
+            ]
+        },
+        {
+            "name": "",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/api/301",
+                    "protocol": "http",
+                    "host": [
+                        "localhost:3000"
+                    ],
+                    "path": [
+                        "api",
+                        "301"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"301\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
+                        ],
+                        "packages": {}
+                    }
+                }
+            ]
+        },
+        {
+            "name": "",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/api/400",
+                    "protocol": "http",
+                    "host": [
+                        "localhost:3000"
+                    ],
+                    "path": [
+                        "api",
+                        "400"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"400\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
+                        ],
+                        "packages": {}
+                    }
+                }
+            ]
+        },
+        {
+            "name": "",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/api/401",
+                    "protocol": "http",
+                    "host": [
+                        "localhost:3000"
+                    ],
+                    "path": [
+                        "api",
+                        "401"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"401\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
+                        ],
+                        "packages": {}
+                    }
+                }
+            ]
+        },
+        {
+            "name": "",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/api/403",
+                    "protocol": "http",
+                    "host": [
+                        "localhost:3000"
+                    ],
+                    "path": [
+                        "api",
+                        "403"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"403\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
+                        ],
+                        "packages": {}
+                    }
+                }
+            ]
+        },
+        {
+            "name": "",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/api/429",
+                    "protocol": "http",
+                    "host": [
+                        "localhost:3000"
+                    ],
+                    "path": [
+                        "api",
+                        "429"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"429\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
+                        ],
+                        "packages": {}
+                    }
+                }
+            ]
+        },
+        {
+            "name": "",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "http://localhost:3000/api/502",
+                    "protocol": "http",
+                    "host": [
+                        "localhost:3000"
+                    ],
+                    "path": [
+                        "api",
+                        "502"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"502\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
                         ],
                         "packages": {}
                     }
@@ -99,306 +399,6 @@
                         "type": "text/javascript",
                         "exec": [
                             "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"204\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
-                        ],
-                        "packages": {}
-                    }
-                }
-            ]
-        },
-        {
-            "name": "",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://localhost:3000/api/400",
-                    "protocol": "http",
-                    "host": [
-                        "localhost:3000"
-                    ],
-                    "path": [
-                        "api",
-                        "400"
-                    ]
-                }
-            },
-            "response": [],
-            "event": [
-                {
-                    "listen": "test",
-                    "script": {
-                        "type": "text/javascript",
-                        "exec": [
-                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"400\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
-                        ],
-                        "packages": {}
-                    }
-                }
-            ]
-        },
-        {
-            "name": "",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://localhost:3000/api/403",
-                    "protocol": "http",
-                    "host": [
-                        "localhost:3000"
-                    ],
-                    "path": [
-                        "api",
-                        "403"
-                    ]
-                }
-            },
-            "response": [],
-            "event": [
-                {
-                    "listen": "test",
-                    "script": {
-                        "type": "text/javascript",
-                        "exec": [
-                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"403\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
-                        ],
-                        "packages": {}
-                    }
-                }
-            ]
-        },
-        {
-            "name": "",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://localhost:3000/api/404",
-                    "protocol": "http",
-                    "host": [
-                        "localhost:3000"
-                    ],
-                    "path": [
-                        "api",
-                        "404"
-                    ]
-                }
-            },
-            "response": [],
-            "event": [
-                {
-                    "listen": "test",
-                    "script": {
-                        "type": "text/javascript",
-                        "exec": [
-                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"404\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
-                        ],
-                        "packages": {}
-                    }
-                }
-            ]
-        },
-        {
-            "name": "",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://localhost:3000/api/500",
-                    "protocol": "http",
-                    "host": [
-                        "localhost:3000"
-                    ],
-                    "path": [
-                        "api",
-                        "500"
-                    ]
-                }
-            },
-            "response": [],
-            "event": [
-                {
-                    "listen": "test",
-                    "script": {
-                        "type": "text/javascript",
-                        "exec": [
-                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"500\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
-                        ],
-                        "packages": {}
-                    }
-                }
-            ]
-        },
-        {
-            "name": "",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://localhost:3000/api/301",
-                    "protocol": "http",
-                    "host": [
-                        "localhost:3000"
-                    ],
-                    "path": [
-                        "api",
-                        "301"
-                    ]
-                }
-            },
-            "response": [],
-            "event": [
-                {
-                    "listen": "test",
-                    "script": {
-                        "type": "text/javascript",
-                        "exec": [
-                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"301\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
-                        ],
-                        "packages": {}
-                    }
-                }
-            ]
-        },
-        {
-            "name": "",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://localhost:3000/api/302",
-                    "protocol": "http",
-                    "host": [
-                        "localhost:3000"
-                    ],
-                    "path": [
-                        "api",
-                        "302"
-                    ]
-                }
-            },
-            "response": [],
-            "event": [
-                {
-                    "listen": "test",
-                    "script": {
-                        "type": "text/javascript",
-                        "exec": [
-                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"302\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
-                        ],
-                        "packages": {}
-                    }
-                }
-            ]
-        },
-        {
-            "name": "",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://localhost:3000/api/401",
-                    "protocol": "http",
-                    "host": [
-                        "localhost:3000"
-                    ],
-                    "path": [
-                        "api",
-                        "401"
-                    ]
-                }
-            },
-            "response": [],
-            "event": [
-                {
-                    "listen": "test",
-                    "script": {
-                        "type": "text/javascript",
-                        "exec": [
-                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"401\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
-                        ],
-                        "packages": {}
-                    }
-                }
-            ]
-        },
-        {
-            "name": "",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://localhost:3000/api/429",
-                    "protocol": "http",
-                    "host": [
-                        "localhost:3000"
-                    ],
-                    "path": [
-                        "api",
-                        "429"
-                    ]
-                }
-            },
-            "response": [],
-            "event": [
-                {
-                    "listen": "test",
-                    "script": {
-                        "type": "text/javascript",
-                        "exec": [
-                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"429\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
-                        ],
-                        "packages": {}
-                    }
-                }
-            ]
-        },
-        {
-            "name": "",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://localhost:3000/api/502",
-                    "protocol": "http",
-                    "host": [
-                        "localhost:3000"
-                    ],
-                    "path": [
-                        "api",
-                        "502"
-                    ]
-                }
-            },
-            "response": [],
-            "event": [
-                {
-                    "listen": "test",
-                    "script": {
-                        "type": "text/javascript",
-                        "exec": [
-                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"502\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
-                        ],
-                        "packages": {}
-                    }
-                }
-            ]
-        },
-        {
-            "name": "",
-            "request": {
-                "method": "GET",
-                "url": {
-                    "raw": "http://localhost:3000/api/503",
-                    "protocol": "http",
-                    "host": [
-                        "localhost:3000"
-                    ],
-                    "path": [
-                        "api",
-                        "503"
-                    ]
-                }
-            },
-            "response": [],
-            "event": [
-                {
-                    "listen": "test",
-                    "script": {
-                        "type": "text/javascript",
-                        "exec": [
-                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"503\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
                         ],
                         "packages": {}
                     }
