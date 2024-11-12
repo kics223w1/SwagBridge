@@ -1,4 +1,5 @@
-module swagbridge
+module github.com/kics223w1/swagbridge
+
 
 go 1.23.3
 

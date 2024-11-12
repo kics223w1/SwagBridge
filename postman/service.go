@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"swagbridge/swagger"
+	"github.com/kics223w1/swagbridge/swagger"
 
 	"github.com/google/uuid"
 )

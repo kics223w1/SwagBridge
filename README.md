@@ -15,11 +15,7 @@ SwagBridge is a command-line tool that converts Swagger/OpenAPI specifications (
 ## Installation
 
 ```bash
-# Using npm
-npm install -g swagbridge
-
-# Using yarn
-yarn global add swagbridge
+go install github.com/kics223w1/swagbridge@latest
 ```
 
 ## Usage

@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"swagbridge/postman"
-	"swagbridge/swagger"
+	"github.com/kics223w1/swagbridge/postman"
+	"github.com/kics223w1/swagbridge/swagger"
 )
 
 func main() {
