@@ -1,4 +1,4 @@
-module llm-generate-test
+module swagbridge
 
 go 1.23.3
 

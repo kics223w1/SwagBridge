@@ -4,9 +4,11 @@ WORKDIR /app
 COPY go.mod go.sum ./
 RUN go mod tidy
 COPY . .
-RUN go build -o swagbridge main.go
+RUN CGO_ENABLED=0 go build -o swagbridge main.go
 
 # Final stage
 FROM alpine:latest
+WORKDIR /app
 COPY --from=builder /app/swagbridge /app/swagbridge
-ENTRYPOINT ["./swagbridge"] 
+RUN chmod +x /app/swagbridge
+ENTRYPOINT ["/app/swagbridge"]
