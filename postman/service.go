@@ -79,6 +79,11 @@ type Variable struct {
 
 // GeneratePostmanCollection converts a Swagger spec to a Postman collection
 func GeneratePostmanCollection(spec *swagger.SwaggerSpec, host string, schema string) (*Collection, error) {
+	// Validate that we have a valid swagger 2.0 spec
+	if spec.Swagger != "2.0" {
+		return nil, fmt.Errorf("unsupported specification version: %s. Only swagger 2.0 is supported", spec.Swagger)
+	}
+
 	collection := &Collection{
 		Info: Info{
 			PostmanID: uuid.New().String(),
