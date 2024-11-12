@@ -1,0 +1,143 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Status Code API",
+    "description": "API with various HTTP status code responses",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/api/200": {
+      "get": {
+        "description": "OK response",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/201": {
+      "post": {
+        "description": "Created response",
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/api/204": {
+      "get": {
+        "description": "No Content response",
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/301": {
+      "get": {
+        "description": "Moved Permanently response",
+        "responses": {
+          "301": {
+            "description": "Moved Permanently"
+          }
+        }
+      }
+    },
+    "/api/302": {
+      "get": {
+        "description": "Found/Temporary redirect response",
+        "responses": {
+          "302": {
+            "description": "Found"
+          }
+        }
+      }
+    },
+    "/api/400": {
+      "get": {
+        "description": "Bad Request response",
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/401": {
+      "get": {
+        "description": "Unauthorized response",
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/403": {
+      "get": {
+        "description": "Forbidden response",
+        "responses": {
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/404": {
+      "get": {
+        "description": "Not Found response",
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/429": {
+      "get": {
+        "description": "Too Many Requests response",
+        "responses": {
+          "429": {
+            "description": "Too Many Requests"
+          }
+        }
+      }
+    },
+    "/api/500": {
+      "get": {
+        "description": "Internal Server Error response",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/502": {
+      "get": {
+        "description": "Bad Gateway response",
+        "responses": {
+          "502": {
+            "description": "Bad Gateway"
+          }
+        }
+      }
+    },
+    "/api/503": {
+      "get": {
+        "description": "Service Unavailable response",
+        "responses": {
+          "503": {
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    }
+  }
+}

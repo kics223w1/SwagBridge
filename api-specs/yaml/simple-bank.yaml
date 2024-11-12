@@ -7,7 +7,7 @@ info:
     url: https://github.com/techschool
     email: techschool.guru@gmail.com
 tags:
-  - name: SimpleBank
+  - name: SimpleBanky
 consumes:
   - application/json
 produces:

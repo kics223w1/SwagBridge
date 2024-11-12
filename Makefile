@@ -1,7 +1,10 @@
 run:
-	go run main.go -i swagger.yaml -h localhost:3000 -o postman_collection.json
+	go run main.go -i ./api-specs/yaml/simple-bank.yaml -h simplebank.com -o ./collections/simplebank_collection.json
 
 build:
-	go build -o swagger-to-postman main.go
+	GOOS=darwin GOARCH=arm64 go build -o swagbridge main.go
 
-.PHONY: run build
+docker-build:
+	docker build -t swagbridge .
+
+.PHONY: run build docker-build
