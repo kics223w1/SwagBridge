@@ -26,6 +26,18 @@ type Item struct {
 	Name     string   `json:"name"`
 	Request  Request  `json:"request"`
 	Response []string `json:"response"`
+	Event    []Event  `json:"event,omitempty"`
+}
+
+type Event struct {
+	Listen string    `json:"listen"`
+	Script EventScript `json:"script"`
+}
+
+type EventScript struct {
+	Type     string   `json:"type"`
+	Exec     []string `json:"exec"`
+	Packages struct{} `json:"packages,omitempty"`
 }
 
 type Request struct {
@@ -64,7 +76,7 @@ type Variable struct {
 }
 
 // GeneratePostmanCollection converts a Swagger spec to a Postman collection
-func GeneratePostmanCollection(spec *swagger.SwaggerSpec) (*Collection, error) {
+func GeneratePostmanCollection(spec *swagger.SwaggerSpec, host string) (*Collection, error) {
 	collection := &Collection{
 		Info: Info{
 			PostmanID: uuid.New().String(),
@@ -76,42 +88,57 @@ func GeneratePostmanCollection(spec *swagger.SwaggerSpec) (*Collection, error) {
 
 	// Convert each path to Postman items
 	for path, pathItem := range spec.Paths {
-		items := convertPathToItems(path, pathItem)
+		items := convertPathToItems(path, pathItem, host)
 		collection.Item = append(collection.Item, items...)
 	}
 
 	return collection, nil
 }
 
-func convertPathToItems(path string, pathItem swagger.PathItem) []Item {
+func convertPathToItems(path string, pathItem swagger.PathItem, host string) []Item {
 	items := make([]Item, 0)
 
 	// Handle GET operations
 	if pathItem.Get != nil {
-		items = append(items, createItem("GET", path, pathItem.Get))
+		items = append(items, createItem("GET", path, pathItem.Get, host))
 	}
 
 	// Handle POST operations
 	if pathItem.Post != nil {
-		items = append(items, createItem("POST", path, pathItem.Post))
+		items = append(items, createItem("POST", path, pathItem.Post, host))
 	}
 
 	// Handle PATCH operations
 	if pathItem.Patch != nil {
-		items = append(items, createItem("PATCH", path, pathItem.Patch))
+		items = append(items, createItem("PATCH", path, pathItem.Patch, host))
 	}
 
 	return items
 }
 
-func createItem(method, path string, operation *swagger.Operation) Item {
+func createItem(method, path string, operation *swagger.Operation, host string) Item {
 	item := Item{
 		Name: operation.Summary,
 		Request: Request{
 			Method: method,
-			URL:    createRequestURL(path, operation.Parameters),
+			URL:    createRequestURL(path, operation.Parameters, host),
 		},
 		Response: make([]string, 0),
+	}
+
+	// Add test script for status code validation
+	if operation.Responses != nil {
+		testScript := createStatusCodeTestScript(operation.Responses)
+		item.Event = []Event{
+			{
+				Listen: "test",
+				Script: EventScript{
+					Type: "text/javascript",
+					Exec: []string{testScript},
+					Packages: struct{}{},
+				},
+			},
+		}
 	}
 
 	// Add headers if needed
@@ -135,10 +162,10 @@ func createItem(method, path string, operation *swagger.Operation) Item {
 	return item
 }
 
-func createRequestURL(path string, parameters []swagger.Parameter) RequestURL {
+func createRequestURL(path string, parameters []swagger.Parameter, host string) RequestURL {
 	url := RequestURL{
 		Protocol: "https",
-		Host:     []string{"{{baseUrl}}"},
+		Host:     []string{host},
 		Path:     strings.Split(strings.Trim(path, "/"), "/"),
 		Query:    make([]URLQuery, 0),
 	}
@@ -154,7 +181,7 @@ func createRequestURL(path string, parameters []swagger.Parameter) RequestURL {
 	}
 
 	// Construct raw URL
-	raw := fmt.Sprintf("{{baseUrl}}%s", path)
+	raw := fmt.Sprintf("%s%s", host, path)
 	if len(url.Query) > 0 {
 		raw += "?"
 		queries := make([]string, 0)
@@ -166,4 +193,25 @@ func createRequestURL(path string, parameters []swagger.Parameter) RequestURL {
 	url.Raw = raw
 
 	return url
+}
+
+func createStatusCodeTestScript(responses map[string]swagger.Response) string {
+	var validCodes []string
+	for code := range responses {
+		validCodes = append(validCodes, code)
+	}
+	
+	script := `
+pm.test("Status code is expected", function() {
+    var expectedCodes = [%s];
+    pm.expect(expectedCodes).to.include(pm.response.code.toString());
+});`
+
+	// Convert status codes to comma-separated string of quoted values
+	quotedCodes := make([]string, len(validCodes))
+	for i, code := range validCodes {
+		quotedCodes[i] = fmt.Sprintf(`"%s"`, code)
+	}
+	
+	return fmt.Sprintf(script, strings.Join(quotedCodes, ", "))
 } 

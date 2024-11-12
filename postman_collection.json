@@ -1,6 +1,6 @@
 {
     "info": {
-        "_postman_id": "15b84855-b541-4fd3-9cdc-bcc5f8350d15",
+        "_postman_id": "cad67f0a-550f-4042-85a5-4a07826e3b92",
         "name": "Simple Bank API",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
@@ -16,10 +16,10 @@
                     }
                 ],
                 "url": {
-                    "raw": "{{baseUrl}}/v1/create_user",
+                    "raw": "https://localhost:3000/v1/create_user",
                     "protocol": "https",
                     "host": [
-                        "{{baseUrl}}"
+                        "https://localhost:3000"
                     ],
                     "path": [
                         "v1",
@@ -31,7 +31,19 @@
                     "raw": "{\n    \"key\": \"value\"\n}"
                 }
             },
-            "response": []
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"200\", \"default\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
+                        ],
+                        "packages": {}
+                    }
+                }
+            ]
         },
         {
             "name": "Login user",
@@ -44,10 +56,10 @@
                     }
                 ],
                 "url": {
-                    "raw": "{{baseUrl}}/v1/login_user",
+                    "raw": "https://localhost:3000/v1/login_user",
                     "protocol": "https",
                     "host": [
-                        "{{baseUrl}}"
+                        "https://localhost:3000"
                     ],
                     "path": [
                         "v1",
@@ -59,7 +71,19 @@
                     "raw": "{\n    \"key\": \"value\"\n}"
                 }
             },
-            "response": []
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"200\", \"default\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
+                        ],
+                        "packages": {}
+                    }
+                }
+            ]
         },
         {
             "name": "Update user",
@@ -72,10 +96,10 @@
                     }
                 ],
                 "url": {
-                    "raw": "{{baseUrl}}/v1/update_user",
+                    "raw": "https://localhost:3000/v1/update_user",
                     "protocol": "https",
                     "host": [
-                        "{{baseUrl}}"
+                        "https://localhost:3000"
                     ],
                     "path": [
                         "v1",
@@ -87,17 +111,29 @@
                     "raw": "{\n    \"key\": \"value\"\n}"
                 }
             },
-            "response": []
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"200\", \"default\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
+                        ],
+                        "packages": {}
+                    }
+                }
+            ]
         },
         {
             "name": "Verify email",
             "request": {
                 "method": "GET",
                 "url": {
-                    "raw": "{{baseUrl}}/v1/verify_email?emailId={{emailId}}\u0026secretCode={{secretCode}}",
+                    "raw": "https://localhost:3000/v1/verify_email?emailId={{emailId}}\u0026secretCode={{secretCode}}",
                     "protocol": "https",
                     "host": [
-                        "{{baseUrl}}"
+                        "https://localhost:3000"
                     ],
                     "path": [
                         "v1",
@@ -115,7 +151,19 @@
                     ]
                 }
             },
-            "response": []
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "type": "text/javascript",
+                        "exec": [
+                            "\npm.test(\"Status code is expected\", function() {\n    var expectedCodes = [\"default\", \"200\"];\n    pm.expect(expectedCodes).to.include(pm.response.code.toString());\n});"
+                        ],
+                        "packages": {}
+                    }
+                }
+            ]
         }
     ]
 }

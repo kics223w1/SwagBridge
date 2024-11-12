@@ -15,14 +15,22 @@ import (
 func main() {
 	// Define the question for file path
 	var filePath string
+	var host string
+
 	prompt := &survey.Input{
 		Message: "Enter the file path:",
 		Help:    "Please provide the path to the file you want to read",
 	}
 
+	promptHost := &survey.Input{
+		Message: "Enter the host:",
+		Help:    "Please provide the host for the collection",
+	}
+
 	// Ask the question
 	err := survey.AskOne(prompt, &filePath)
-	if err != nil {
+	err2 := survey.AskOne(promptHost, &host)
+	if err != nil || err2 != nil {
 		fmt.Printf("Error getting input: %v\n", err)
 		return
 	}
@@ -42,7 +50,7 @@ func main() {
 	}
 
 	// Generate Postman collection
-	collection, err := postman.GeneratePostmanCollection(spec)
+	collection, err := postman.GeneratePostmanCollection(spec , host)
 	if err != nil {
 		log.Fatal(err)
 	}
