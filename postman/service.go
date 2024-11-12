@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"llm-generate-test/swagger"
+	"swagbridge/swagger"
 
 	"github.com/google/uuid"
 )

@@ -5,12 +5,13 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
-	"llm-generate-test/postman"
-	"llm-generate-test/swagger"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"swagbridge/postman"
+	"swagbridge/swagger"
 )
 
 func main() {
