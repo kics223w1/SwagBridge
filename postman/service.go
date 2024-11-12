@@ -2,7 +2,9 @@ package postman
 
 import (
 	"fmt"
+	"math/rand"
 	"strings"
+	"time"
 
 	"llm-generate-test/swagger"
 
@@ -76,7 +78,7 @@ type Variable struct {
 }
 
 // GeneratePostmanCollection converts a Swagger spec to a Postman collection
-func GeneratePostmanCollection(spec *swagger.SwaggerSpec, host string) (*Collection, error) {
+func GeneratePostmanCollection(spec *swagger.SwaggerSpec, host string, schema string) (*Collection, error) {
 	collection := &Collection{
 		Info: Info{
 			PostmanID: uuid.New().String(),
@@ -88,40 +90,40 @@ func GeneratePostmanCollection(spec *swagger.SwaggerSpec, host string) (*Collect
 
 	// Convert each path to Postman items
 	for path, pathItem := range spec.Paths {
-		items := convertPathToItems(path, pathItem, host)
+		items := convertPathToItems(path, pathItem, host, schema)
 		collection.Item = append(collection.Item, items...)
 	}
 
 	return collection, nil
 }
 
-func convertPathToItems(path string, pathItem swagger.PathItem, host string) []Item {
+func convertPathToItems(path string, pathItem swagger.PathItem, host string, schema string) []Item {
 	items := make([]Item, 0)
 
 	// Handle GET operations
 	if pathItem.Get != nil {
-		items = append(items, createItem("GET", path, pathItem.Get, host))
+		items = append(items, createItem("GET", path, pathItem.Get, host, schema))
 	}
 
 	// Handle POST operations
 	if pathItem.Post != nil {
-		items = append(items, createItem("POST", path, pathItem.Post, host))
+		items = append(items, createItem("POST", path, pathItem.Post, host, schema))
 	}
 
 	// Handle PATCH operations
 	if pathItem.Patch != nil {
-		items = append(items, createItem("PATCH", path, pathItem.Patch, host))
+		items = append(items, createItem("PATCH", path, pathItem.Patch, host, schema))
 	}
 
 	return items
 }
 
-func createItem(method, path string, operation *swagger.Operation, host string) Item {
+func createItem(method, path string, operation *swagger.Operation, host string, schema string) Item {
 	item := Item{
 		Name: operation.Summary,
 		Request: Request{
 			Method: method,
-			URL:    createRequestURL(path, operation.Parameters, host),
+			URL:    createRequestURL(path, operation.Parameters, host, schema),
 		},
 		Response: make([]string, 0),
 	}
@@ -162,26 +164,27 @@ func createItem(method, path string, operation *swagger.Operation, host string) 
 	return item
 }
 
-func createRequestURL(path string, parameters []swagger.Parameter, host string) RequestURL {
+func createRequestURL(path string, parameters []swagger.Parameter, host string, schema string) RequestURL {
 	url := RequestURL{
-		Protocol: "https",
+		Protocol: schema,
 		Host:     []string{host},
 		Path:     strings.Split(strings.Trim(path, "/"), "/"),
 		Query:    make([]URLQuery, 0),
 	}
 
-	// Add query parameters
+	// Add query parameters with random values based on type
 	for _, param := range parameters {
 		if param.In == "query" {
+			randomValue := generateRandomValueByType(param.Type, param.Format)
 			url.Query = append(url.Query, URLQuery{
 				Key:   param.Name,
-				Value: fmt.Sprintf("{{%s}}", param.Name),
+				Value: randomValue,
 			})
 		}
 	}
 
-	// Construct raw URL
-	raw := fmt.Sprintf("%s%s", host, path)
+	// Construct raw URL using the provided schema
+	raw := fmt.Sprintf("%s://%s%s", schema, host, path)
 	if len(url.Query) > 0 {
 		raw += "?"
 		queries := make([]string, 0)
@@ -193,6 +196,29 @@ func createRequestURL(path string, parameters []swagger.Parameter, host string) 
 	url.Raw = raw
 
 	return url
+}
+
+// New helper function to generate random values
+func generateRandomValueByType(paramType, format string) string {
+	switch paramType {
+	case "string":
+		switch format {
+		case "uuid":
+			return uuid.New().String()
+		case "date-time":
+			return time.Now().Format(time.RFC3339)
+		case "email":
+			return fmt.Sprintf("user%d@example.com", rand.Intn(1000))
+		default:
+			return fmt.Sprintf("sample_string_%d", rand.Intn(1000))
+		}
+	case "integer", "number":
+		return fmt.Sprintf("%d", rand.Intn(100))
+	case "boolean":
+		return fmt.Sprintf("%v", rand.Intn(2) == 1)
+	default:
+		return "sample_value"
+	}
 }
 
 func createStatusCodeTestScript(responses map[string]swagger.Response) string {
