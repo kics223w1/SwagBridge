@@ -18,36 +18,42 @@ SwagBridge is a command-line tool that converts Swagger/OpenAPI specifications (
 go install github.com/kics223w1/swagbridge@latest
 ```
 
+### Troubleshooting Installation
+
+If you see `zsh: command not found: swagbridge` after installation, you need to add Go's bin directory to your PATH:
+
+1. Add this line to your shell configuration file (`~/.zshrc` for zsh, `~/.bashrc` for bash):
+
+   ```bash
+   export PATH=$PATH:$(go env GOPATH)/bin
+   ```
+
+2. Reload your shell configuration:
+   ```bash
+   source ~/.zshrc  # for zsh
+   # or
+   source ~/.bashrc # for bash
+   ```
+
+Alternatively, you can run the binary directly using:
+
+```bash
+~/go/bin/swagbridge
+```
+
 ## Usage
 
 ```bash
 # Basic conversion
-swagbridge convert -i swagger.yaml -o postman_collection.json
-
-# Specify format (default is postman)
-swagbridge convert -i swagger.yaml -o collection.json --format postman
-
-# Available formats: postman, insomnia, yaak, paw
+swagbridge -i api-specs/swagger.json -h localhost:3000 -s http -o collections/api_collection.json
 ```
 
 ### Examples
 
-1. Convert a local Swagger file:
+1. Convert a local Swagger file with host and scheme:
 
 ```bash
-swagbridge convert -i ./api/swagger.yaml -o ./collections/my_api.json
-```
-
-2. Convert from URL:
-
-```bash
-swagbridge convert -i https://api.example.com/swagger.yaml -o ./my_api_collection.json
-```
-
-3. Convert with specific format:
-
-```bash
-swagbridge convert -i swagger.yaml -o insomnia_collection.json --format insomnia
+swagbridge -i ./api-specs/api.json -h api.example.com -s https -o ./collections/my_api.json
 ```
 
 ## Contributing
